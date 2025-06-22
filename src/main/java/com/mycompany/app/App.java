@@ -5,3 +5,8 @@ public class App {
         System.out.println("Hello, World!");
     }
 }
+public class App {
+    public String getMessage() {
+        return "Hello World!";
+    }
+}
