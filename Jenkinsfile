@@ -35,16 +35,11 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy in local') {
             steps {
                 // Simple deployment example
                 sh 'echo "Deploying application..."'
                 // Example of copying artifacts to a deploy location
-               sh 'mkdir -p ${WORKSPACE}/deploy'
-               sh 'cp target/basic-java-app-1.0-SNAPSHOT.jar ${WORKSPACE}/deploy/'
-               cd /var/lib/jenkins/workspace/Auto_SCM/target
-               java -jar basic-java-app-1.0-SNAPSHOT.jar
-
             }
         }
     }
