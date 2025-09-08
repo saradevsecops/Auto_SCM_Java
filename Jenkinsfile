@@ -7,28 +7,28 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
+        stage('CodeCheckout from Github') {
             steps {
                 // Checkout code from SCM
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Maven Build') {
             steps {
                 // Build the project using Maven
                 sh 'mvn clean install'
             }
         }
 
-        stage('Test') {
+        stage('Maven Test') {
             steps {
                 // Run unit tests
                 sh 'mvn test'
             }
         }
 
-        stage('Package') {
+        stage('Packaging into jar') {
             steps {
                 // Package the application
                 sh 'mvn package'
@@ -42,6 +42,8 @@ pipeline {
                 // Example of copying artifacts to a deploy location
                sh 'mkdir -p ${WORKSPACE}/deploy'
                sh 'cp target/basic-java-app-1.0-SNAPSHOT.jar ${WORKSPACE}/deploy/'
+               cd /var/lib/jenkins/workspace/Auto_SCM/target
+               java -jar basic-java-app-1.0-SNAPSHOT.jar
 
             }
         }
