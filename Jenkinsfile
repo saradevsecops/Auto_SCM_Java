@@ -34,14 +34,6 @@ pipeline {
                 sh 'mvn package'
             }
         }
-
-        stage('Deploy in local') {
-            steps {
-                // Simple deployment example
-                sh 'echo "Deploying application..."'
-                // Example of copying artifacts to a deploy location
-            }
-        }
     }
 
     post {
