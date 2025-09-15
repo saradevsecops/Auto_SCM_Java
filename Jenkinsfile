@@ -27,6 +27,16 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                // Use the SonarQube environment configured in Jenkins (with name "MySonarQube" for example)
+                withSonarQubeEnv('MySonarQube') {
+                    // Run Sonar analysis. 
+                    // You can include sonar in your Maven command, e.g. using sonar:sonar goal
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
 
         stage('Packaging into jar') {
             steps {
