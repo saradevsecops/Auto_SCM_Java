@@ -27,14 +27,7 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        stage('Packaging into jar') {
-            steps {
-                // Package the application
-                sh 'mvn package'
-            }
-        }
-                stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
           steps {
             script {
             def scannerHome = tool 'MySonarScanner'
@@ -53,6 +46,12 @@ pipeline {
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
+            }
+        }
+        stage('Packaging into jar') {
+            steps {
+                // Package the application
+                sh 'mvn package'
             }
         }
     }
