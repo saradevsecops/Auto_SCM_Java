@@ -27,22 +27,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-                stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // This 'tool' refers to the Sonar Scanner tool that you configured in Jenkins
-                    def scannerHome = tool 'MySonarScanner'  
-                    withSonarQubeEnv('MySonarScanner') {
-                        // Now run sonar scanner binary
-                        sh "${scannerHome}/bin/sonar-scanner \
-                           -Dsonar.projectKey=HotstarClone \
-                           -Dsonar.sources=src \
-                           -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                           -Dsonar.login=${env.SONAR_AUTH_TOKEN}"
-                    }
-                }
-            }
-        }
 
         stage('Packaging into jar') {
             steps {
