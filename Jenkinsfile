@@ -32,7 +32,7 @@ pipeline {
                 script {
                     // This 'tool' refers to the Sonar Scanner tool that you configured in Jenkins
                     def scannerHome = tool 'MySonarScanner'  
-                    withSonarQubeEnv('MySonarQServer') {
+                    withSonarQubeEnv('MySonarScanner') {
                         // Now run sonar scanner binary
                         sh "${scannerHome}/bin/sonar-scanner \
                            -Dsonar.projectKey=HotstarClone \
