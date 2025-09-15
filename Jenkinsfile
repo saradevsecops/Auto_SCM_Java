@@ -29,7 +29,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                // Use the SonarQube environment configured in Jenkins (with name "MySonarQube" for example)
+                // Use the SonarQube environment configured in Jenkins
                 withSonarQubeEnv('MySonarQube') {
                     // Run Sonar analysis. 
                     // You can include sonar in your Maven command, e.g. using sonar:sonar goal
