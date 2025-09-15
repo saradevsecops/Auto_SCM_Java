@@ -34,6 +34,27 @@ pipeline {
                 sh 'mvn package'
             }
         }
+                stage('SonarQube Analysis') {
+          steps {
+            script {
+            def scannerHome = tool 'MySonarScanner'
+            withSonarQubeEnv('MySonarServer') {
+              sh "mvn clean compile sonar:sonar " +
+                "-Dsonar.projectKey=AutoSCMJava " +
+                "-Dsonar.host.url=${env.SONAR_HOST_URL} " +
+                "-Dsonar.login=${env.SONAR_TOKEN} " +
+                "-Dsonar.java.binaries=target/classes"
+               }
+            }
+          }
+        }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
     }
 
     post {
